@@ -1,0 +1,681 @@
+@startuml ims
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+' By Yash Anand - 9311670656 - yash.anand@fosteringlinux.com'
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+' Adding comments: https://plantuml.com/commons
+' skinparam linetype polyline
+skinparam linetype ortho
+skinparam Shadowing true
+skinparam DefaultFontColor White
+skinparam BackgroundColor #Grey
+skinparam DefaultTextAlignment center
+allowmixing
+' legend from: https://stackoverflow.com/questions/30999290/how-to-generate-a-legend-with-colors-in-plantuml
+
+legend top right
+    |Line Colour | Assigned To |
+    |<#Gold>| Storage|
+    |<#Cyan>| Infra|
+    |<#Lime>| Application|
+endlegend
+
+'bolding text: https://plantuml.com/creole#:~:text=for%20bold%20text,colorName%5D%5D%3E%20for%20strike%20text
+' single element colouring: https://forum.plantuml.net/2/how-to-change-the-color-of-an-individual-element
+' all colours: https://plantuml-documentation.readthedocs.io/en/latest/formatting/color-names.html
+' colours ref2.0: https://crashedmind.github.io/PlantUMLHitchhikersGuide/color/color.html
+
+'Adding headings: https://plantuml.com/creole
+
+rectangle Heading #DarkSlateGrey [
+=Inventory Management System
+....
+==== Requirements Diagram
+]
+
+rectangle CUSTOMER #DarkSlateGrey{
+    rectangle NIC #DarkRed
+}
+
+rectangle PROJECTS #DarkSlateGrey{
+    rectangle MyGov #Red 
+    rectangle eTransport #DarkRed 
+    rectangle NSP #Red 
+}
+
+rectangle DATACENTER #DarkSlateGrey{
+rectangle DC_Delhi #DarkRed
+}
+rectangle APPLICATION_ENVIRONMENTS #DarkSlateGrey{
+rectangle Vahan #Red
+rectangle Checkpost #DarkRed
+rectangle Sarathi #Red
+}
+
+rectangle SETUP_ENVIROMENT #DarkSlateGrey{
+rectangle Testing #Red
+rectangle Staging #DarkRed
+rectangle Pre_Production #Red
+rectangle Production #Red
+}
+
+rectangle SERVER_INVENTORY {
+
+rectangle application  #DarkSlateGrey{
+
+        rectangle DATABASE_Backup #Green{
+                    rectangle Database_Start #LimeGreen[
+            =DATABASE BACKUP 
+        ]
+        
+        rectangle LAST_BACKUP_DATE #LimeGreen[
+            =LAST BACKUP DATE
+            ----
+            22/09/23
+        ]
+
+        rectangle BACKUP_CONFIG #LimeGreen[
+            =BACKUP CONFIG
+            ----
+            https://gitlab.com/checkpostApp1/backupconfig
+        ]
+
+        rectangle BACKUP  #LimeGreen[
+            =BACKUP
+            ----
+            Yes
+        ]
+
+        rectangle DB_SERVER_READ_apps1  #LimeGreen[
+            =DB SERVER READ
+            ----
+            10.246.40.182:5432
+            10.242.36.129:5432
+            10.242.36.130:5432
+        ]
+
+        rectangle DB_SERVER_WRITE_apps1  #LimeGreen[
+            =DB SERVER WRITE
+            ----
+            10.246.40.186:5433
+        ]
+
+        rectangle DATABASE_apps1  #LimeGreen[
+            =DATABASE NAME
+            ----
+            Postges
+        ]
+    }
+
+
+
+    rectangle SERVICES #Green{
+            rectangle Services_Start #LimeGreen[
+            =SERVICES
+        ]
+
+        rectangle LISTENING_PORT_apps1  #LimeGreen[
+            =LISTENING PORT
+            ----
+            25
+        ]
+
+        rectangle LISTENING_IP_apps1  #LimeGreen[
+            =LISTENING IP
+            ----
+            127.0.0.1
+        ]
+
+        rectangle SERVICE_PATH_apps1  #LimeGreen[
+            =SERVICE PATH
+            ----
+            /usr/libexec/postfix/master -w
+            /opt/commvault/Base/cvd
+            nimbus(controller)
+            nimbus(spooler)
+            /opt/commvault/Base/ClMgrS
+            /usr/sbin/zabbix_agentd -c /etc/zabbix/zabbix_agentd.conf
+            /opt/commvault/Base/cvd
+            nimbus(hdb)
+            nimbus(processes)
+            nimbus(cdm)
+            cam
+            nimbus(logmon)
+        ]
+
+        rectangle SERVICE_NAME_apps1  #LimeGreen[
+            =SERVICE NAME
+            ----
+            master
+            cvd
+            nimbus(control)
+            nimbus(spoole)
+            ClMgrS
+            zabbix_agentd
+            cvd
+            nimbus(hdb)
+            nimbus(process)
+            nimbus(cdm)
+            cam
+            nimbus(logmon)
+            ]
+    }
+
+    rectangle Tomcat_Details #Green{
+        rectangle Tomcat_Start #LimeGreen[
+            =TOMCAT DETAILS
+        ]
+
+        rectangle CONFIG_MAP_apps1  #LimeGreen[
+            =CONFIG MAP
+            ----
+            server.XML
+            https://gitlab.com/configmap/NA/-/blob/main/server.XML
+            context.XML
+            https://gitlab.com/configmap/NA/-/blob/main/Context.XML
+            web.XML
+            https://gitlab.com/configmap/NA/-/blob/main/web.xml
+        ]
+
+        rectangle WEBAPP_PATH_apps1  #LimeGreen[
+            =WEBAPP PATH
+            ----
+            /u01/tcat_checkpost_8083/webapps
+            /u01/tcat_checkpost_8084/webapps
+            /u01/tcat_checkpost_8085/webapps
+        ]
+
+        rectangle LOGS_PATH_apps1  #LimeGreen[
+            =LOGS PATH
+            ----
+            /u01/tcat_checkpost_8083/logs
+            /u01/tcat_checkpost_8084/logs
+            /u01/tcat_checkpost_8085/logs
+        ]
+
+        rectangle WAR_DEPLOYED_apps1  #LimeGreen[
+            =WAR DEPLOYED
+            ----
+            CheckpostApp1.war
+        ]
+
+
+        rectangle TOMCAT_PORT_apps1  #LimeGreen[
+            =TOMCAT PORT
+            ----
+            8083
+            8084
+            8085
+        ]
+
+        rectangle TOMCAT_NAME_apps1  #LimeGreen[
+            =TOMCAT NAME
+            ----
+            tcat_checkpost_8083
+            tcat_checkpost_8084
+            tcat_checkpost_8085
+        ]
+    }
+
+    rectangle network_details #Green{
+          rectangle Network_Start #LimeGreen[
+            =NETWORK DETAILS
+        ]
+
+        rectangle NTP_SERVER_apps1  #LimeGreen[
+            =NTP SERVER
+            ----
+            Yes
+        ]
+
+        rectangle HAPROXY_PORT  #LimeGreen[
+            =HAPROXY PORT
+            ----
+            80
+        ]
+
+        rectangle MAC_IP  #LimeGreen[
+            =MAC IP
+            ----
+            00:00:5e:00:53:af
+        ]
+
+        rectangle LB_IP  #LimeGreen[
+            =LB IP
+            ----
+            1.8
+        ]
+
+        rectangle IP  #LimeGreen[
+            =IP
+            ----
+            10.249.221.21
+        ]
+    }
+
+    rectangle App_Start #LimeGreen[
+            =APP DETAILS
+        ]
+
+    rectangle App_Details #Green{
+        
+        rectangle HOSTNAME_apps1  #LimeGreen[
+        =HOSTNAME
+        ----
+        Checkpost1
+        ]
+
+        rectangle DOCUMENT_TYPE_apps1  #LimeGreen[
+            =DOCUMENT TYPE
+            ----
+            Automated
+        ]
+        rectangle DOCUMENT_PATH  #LimeGreen[
+            =DEPLOYMENT DOCUMENT
+            ----
+            https://gitlab.com/checkpostApp1/Readme.md/
+        ]
+
+        rectangle DEPLOYMENT_DOCUMENT  #LimeGreen[
+            =DEPLOYMENT DOCUMENT
+            ----
+            Yes
+        ]
+
+        rectangle GIT_REPOSITORY_LINK  #LimeGreen[
+            =GIT REPOSITORY LINK
+            ----
+            https://gitlab.com/checkpostApp1
+        ]
+
+        rectangle GIT  #LimeGreen[
+            =GIT ENVIRONMENT
+            ----
+            Yes
+        ]
+
+        rectangle APP_PLATFORM  #LimeGreen[
+            =APP PLATFORM
+            ----
+            Systemd
+        ]
+
+        rectangle PROGRAMMING_LANGUAGE_VERSION  #LimeGreen[
+            =PROGRAMMING LANGUAGE VERSION
+            ----
+            1.8
+        ]
+
+        rectangle PROGRAMMING_LANGUAGE  #LimeGreen[
+            =PROGRAMMING LANGUAGE
+            ----
+            Java
+        ]
+
+        rectangle API_Webservice_apps1  #LimeGreen[
+            =API/WEBSERVICE URL
+            ----
+            CheckpostWebService
+        ]
+
+        rectangle APP_DEPLOYMENT_PREREQUISITES_apps1  #LimeGreen[
+        =APP DEPLOYMENT PRE-REQUISITES
+        ----
+        Java
+        Tomcat
+        ]
+
+        rectangle DEPENDED_APPLICATION_apps1  #LimeGreen[
+            =DEPENDED APPLICATION
+            ----
+            CheckpostApp2
+        ]
+
+        rectangle LAST_APP_VERSION  #LimeGreen[
+            =LAST APP VERSION
+            ----
+            22/09/23
+        ]
+
+        rectangle PUBLIC_URL  #LimeGreen[
+            =PUBLIC URL
+            ----
+            checkpost.parivahan.gov.in/
+        ]
+
+        rectangle APP_NAME  #LimeGreen[
+            =APP NAME
+            ----
+            CheckpostApp1
+        ]
+    }
+}
+
+rectangle infra #DarkSlateGrey{
+    rectangle HOSTNAME_infra1 #DarkBlue[
+    =HOSTNAME
+    ----
+    Checkpost1
+]
+
+rectangle IP_infra1 #Blue[
+    =IP
+    ----
+    10.249.221.21
+]
+
+rectangle CPU_infra1 #Blue[
+    =CPU
+    ----
+    8
+]
+
+rectangle RAM_infra1 #Blue[
+    =RAM
+    ----
+    32GB
+]
+
+rectangle TYPE_infra1 #Blue[
+    =TYPE
+    ----
+    PHYSICAL
+]
+
+rectangle VM_HYPERVISOR_infra1 #Blue[
+    =VM HYPERVISER
+    ----
+    N/A
+]
+
+rectangle NETMASK_infra1 #Blue[
+    =NETMASK
+    ----
+    255.255.255.128
+]
+
+rectangle OS_infra1 #Blue[
+    =OS
+    ----
+    RHEL 8.7
+]
+
+rectangle OS_VERSION_infra1 #Blue[
+    =OS VERSION
+    ----
+    8.7
+]
+
+rectangle KERNEL_VERSION_infra1 #Blue[
+    =KERNEL VERSION
+    ----
+    4.15.0-46-generic
+]
+
+rectangle GATEWAY_infra1 #Blue[
+    =GATEWAY
+    ----
+    10.249.221.1
+]
+
+rectangle LAST_PATCHED_infra1 #Blue[
+    =LAST PATCHED
+    ----
+    22/09/23s
+]
+}
+
+rectangle storage #DarkSlateGrey{
+    rectangle STORAGE #DarkGoldenRod[
+        =STORAGE
+    ]
+
+rectangle NFS #GoldenRod[
+    =NFS
+    ----
+    IP:foldername /u01/nfsstorage
+]
+
+rectangle OBJECT_STORAGE #GoldenRod[
+    =OBJECT STORAGE
+    ----
+    https://Objectstorage.nic.com
+]
+
+rectangle LOCAL_DISK #GoldenRod[
+    =LOCAL DISK
+    ----
+    sda:105GB
+]
+
+rectangle LOCAL_DISK_ATTRIBUTES #DarkGoldenRod{
+        rectangle LVM1 #GoldenRod[
+    =LVM
+    ----
+    home
+    opt
+    root
+    swap
+    tmp
+    usr
+    var
+    var_log_audit
+    lv0
+    ]
+
+    rectangle LOCAL_DISK_PARTITION #GoldenRod[
+    =LOCAL_DISK_PARTITION
+    ----
+    /:20GB
+    /var:9GB
+    /home:10GB
+    /opt:6GB
+    /tmp:10GB
+    /boot:2GB
+    /boot/efi:1GB
+    ]
+
+    rectangle VG1 #GoldenRod[
+    =VG
+    ----
+    /dev/mapper/vg0-lv0:500GB
+    ]
+
+        rectangle PV1 #GoldenRod[
+    =PV
+    ----
+    PV Name=/dev/sda3
+    PV Size=101.00g
+    PV Name=/dev/sdb
+    PV Size=500.00g
+    ]
+}
+
+rectangle SAN_DISK #GoldenRod[
+    =SAN_DISK
+    ----
+    sda:sdb:500GB
+]
+
+rectangle SAN_DISK_ATTRIBUTES #DarkGoldenRod{
+
+    rectangle SAN_DISK_PARTITION #GoldenRod[
+    =SAN_DISK_PARTITION
+    ----
+    /:20GB
+    /var:9GB
+    /home:10GB
+    /opt:6GB
+    /tmp:10GB
+    /boot:2GB
+    /boot/efi:1GB
+    ]
+        rectangle LVM2 #GoldenRod[
+    =LVM
+    ----
+    home
+    opt
+    root
+    swap
+    tmp
+    usr
+    var
+    var_log_audit
+    lv0
+    ]
+
+    rectangle VG2 #GoldenRod[
+    =VG
+    ----
+    /dev/mapper/vg0-lv0:500GB
+    ]
+
+    rectangle PV2 #GoldenRod[
+    =PV
+    ----
+    PV Name=/dev/sda3
+    PV Size=101.00g
+    PV Name=/dev/sdb
+    PV Size=500.00g
+    ]
+
+    rectangle WWN #GoldenRod[
+    =WWN
+    ----
+    xyzafldsafla
+    ]
+}
+    rectangle HOSTNAME #GoldenRod[
+    =HOSTNAME
+    ----
+    Checkpost1]
+}
+}
+
+Heading --[hidden]d-> NIC
+
+' lines & formatting: https://blog.mrhaki.com/2016/12/plantuml-pleasantness-change-line-style.html#:~:text=We%20can%20choose%20the%20following,%2C%20plain%20%2C%20dotted%20and%20dashed%20.
+NIC -- MyGov
+NIC -[bold,#DarkRed]d--> eTransport
+NIC -- NSP
+eTransport -[bold,#DarkRed]--> DC_Delhi
+DC_Delhi -[bold,#DarkRed]--> Checkpost
+DC_Delhi --> Vahan
+DC_Delhi --> Sarathi
+Checkpost --- Pre_Production
+Checkpost --- Testing
+Checkpost --[bold,#DarkRed]-> Staging
+Checkpost -- Production
+Staging -[bold,#Gold]-- storage
+Staging -[bold,#Cyan]-- infra
+infra ---[hidden]d----> application
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+'''''''''''''''''''STAGING TO APPLICATION''''''''''''''''''
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Staging -[bold,#Lime]d--> App_Start
+App_Details -[hidden]d--------------> SERVICES
+App_Start -[bold,#Lime]d----> Services_Start
+Services_Start -[hidden]d------> Tomcat_Start
+App_Start -[bold,#Lime]d-> Tomcat_Start
+Tomcat_Start -[hidden]d-> App_Details
+
+App_Start -[bold,#Lime]d----> Network_Start
+App_Details -[hidden]d----> Database_Start
+network_details <-[hidden]l- Database_Start
+App_Start -[bold,#Lime]d--> Database_Start
+
+'Database_Start -[bold,#Lime]d-> DATABASE_Backup
+'Network_Start -[bold,#Lime]d-> network_details
+'Tomcat_Start -[bold,#Lime]d-> Tomcat_Details
+'Services_Start -[bold,#Lime]d-> SERVICES 
+
+''db
+Database_Start -[bold,#Lime]d-> BACKUP
+BACKUP -[bold,#Lime]d-> BACKUP_CONFIG
+BACKUP -[bold,#Lime]d-> LAST_BACKUP_DATE
+Database_Start -[bold,#Lime]d-> DATABASE_apps1
+DATABASE_apps1 -[bold,#Lime]d-> DB_SERVER_READ_apps1
+DATABASE_apps1 -[bold,#Lime]d-> DB_SERVER_WRITE_apps1
+''services
+Services_Start -[bold,#Lime]d-> SERVICE_NAME_apps1
+Services_Start -[bold,#Lime]d-> SERVICE_PATH_apps1
+LISTENING_IP_apps1 -[hidden]d-> SERVICE_PATH_apps1
+LISTENING_PORT_apps1 -[hidden]d-> SERVICE_NAME_apps1
+Services_Start -[bold,#Lime]d-> LISTENING_IP_apps1
+Services_Start -[bold,#Lime]d-> LISTENING_PORT_apps1
+''tomcat
+Tomcat_Start -[bold,#Lime]d-> TOMCAT_NAME_apps1
+Tomcat_Start -[bold,#Lime]d-> WAR_DEPLOYED_apps1
+Tomcat_Start -[bold,#Lime]d-> TOMCAT_PORT_apps1
+TOMCAT_NAME_apps1 -[hidden]d-> TOMCAT_PORT_apps1
+Tomcat_Start -[bold,#Lime]d-> WEBAPP_PATH_apps1
+Tomcat_Start -[bold,#Lime]d-> LOGS_PATH_apps1
+LOGS_PATH_apps1 -[hidden]d-> CONFIG_MAP_apps1
+Tomcat_Start -[bold,#Lime]d-> CONFIG_MAP_apps1
+''network
+Network_Start -[bold,#Lime]d-> IP
+Network_Start -[bold,#Lime]d-> LB_IP
+IP -[hidden]d-> LB_IP
+Network_Start -[bold,#Lime]d-> MAC_IP
+Network_Start -[bold,#Lime]d-> HAPROXY_PORT
+MAC_IP -[hidden]d-> HAPROXY_PORT
+Network_Start -[bold,#Lime]d-> NTP_SERVER_apps1
+''Apps
+
+APP_NAME -[hidden]d-> PUBLIC_URL
+DEPENDED_APPLICATION_apps1 -[hidden]d-> APP_DEPLOYMENT_PREREQUISITES_apps1
+LAST_APP_VERSION -[hidden]d-> PUBLIC_URL
+
+App_Start -[bold,#Lime]d-> App_Details
+App_Details -[bold,#Lime]-> APP_NAME
+APP_NAME -[bold,#Lime]d-> HOSTNAME_apps1
+APP_NAME -[bold,#Lime]d-> PUBLIC_URL
+APP_NAME -[bold,#Lime]d-> LAST_APP_VERSION
+APP_NAME -[bold,#Lime]d-> DEPENDED_APPLICATION_apps1
+APP_NAME -[bold,#Lime]d-> APP_DEPLOYMENT_PREREQUISITES_apps1
+APP_NAME -[bold,#Lime]d-> API_Webservice_apps1
+APP_NAME -[bold,#Lime]d-> APP_PLATFORM
+APP_NAME -[bold,#Lime]d-> PROGRAMMING_LANGUAGE
+PROGRAMMING_LANGUAGE -[bold,#Lime]d-> PROGRAMMING_LANGUAGE_VERSION
+APP_NAME -[bold,#Lime]d-> GIT
+GIT -[bold,#Lime]d-> GIT_REPOSITORY_LINK
+APP_NAME -[bold,#Lime]d-> DEPLOYMENT_DOCUMENT
+DEPLOYMENT_DOCUMENT -[bold,#Lime]d-> DOCUMENT_PATH
+DEPLOYMENT_DOCUMENT -[bold,#Lime]d-> DOCUMENT_TYPE_apps1
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+'''''''''''''''''''STAGING TO INFRA''''''''''''''''''
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+infra -[bold,#Cyan]-> HOSTNAME_infra1
+HOSTNAME_infra1 -[bold,#Cyan]-> IP_infra1
+HOSTNAME_infra1 -[bold,#Cyan]-> CPU_infra1
+HOSTNAME_infra1 -[bold,#Cyan]-> RAM_infra1
+HOSTNAME_infra1 -[bold,#Cyan]-> TYPE_infra1
+HOSTNAME_infra1 -[bold,#Cyan]-> VM_HYPERVISOR_infra1
+HOSTNAME_infra1 -[bold,#Cyan]-> NETMASK_infra1
+HOSTNAME_infra1 -[bold,#Cyan]-> OS_infra1
+OS_infra1 -[bold,#Cyan]d-> OS_VERSION_infra1
+HOSTNAME_infra1 -[bold,#Cyan]-> KERNEL_VERSION_infra1
+HOSTNAME_infra1 -[bold,#Cyan]-> GATEWAY_infra1
+HOSTNAME_infra1 -[bold,#Cyan]-> LAST_PATCHED_infra1
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+'''''''''''''''''''STAGING TO STORAGE''''''''''''''''''
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+storage -[bold,#Gold]-> STORAGE
+STORAGE -[bold,#Gold]-> HOSTNAME
+STORAGE -[bold,#Gold]-> NFS
+STORAGE -[bold,#Gold]-> OBJECT_STORAGE
+STORAGE -[bold,#Gold]-> LOCAL_DISK
+LOCAL_DISK -[bold,#Gold]-> LOCAL_DISK_ATTRIBUTES
+PV1 -[bold,#Gold]r-> VG1
+VG1 -[bold,#Gold]r-> LOCAL_DISK_PARTITION
+LOCAL_DISK_PARTITION -[bold,#Gold]r-> LVM1
+STORAGE -[bold,#Gold]-> SAN_DISK
+SAN_DISK -[bold,#Gold]-> SAN_DISK_ATTRIBUTES
+WWN -[bold,#Gold]r-> PV2
+PV2 -[bold,#Gold]r-> VG2
+VG2 -[bold,#Gold]r-> SAN_DISK_PARTITION
+SAN_DISK_PARTITION -[bold,#Gold]r-> LVM2
+
+@enduml
